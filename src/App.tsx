@@ -106,7 +106,7 @@ export default function App() {
       </main>
 
       <footer className="fixed bottom-0 left-0 right-0 p-6 text-[10px] uppercase font-bold tracking-widest opacity-50 flex justify-between">
-        <span>© 2026 IMPOSTER WORD GAME</span>
+        
         <span>STAY ALERT. FIND THEM.</span>
       </footer>
     </div>
