@@ -1,0 +1,6 @@
+{
+  "name": "Imposter Word Game",
+  "description": "A multiplayer party game of social deduction and clever clues. Find the imposter before they guess the secret word!",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
