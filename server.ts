@@ -113,10 +113,17 @@ async function startServer() {
         p.votedFor = undefined;
       });
 
+      // Shuffle players array using Fisher-Yates
+      for (let i = room.players.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [room.players[i], room.players[j]] = [room.players[j], room.players[i]];
+      }
+
+      room.currentTurnIndex = 0;
+
       room.state = "ROLES";
       room.category = category;
       room.word = word;
-      room.currentTurnIndex = 0;
       room.winner = undefined;
       room.imposterGuess = undefined;
       room.caught = false;
