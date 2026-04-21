@@ -9,11 +9,16 @@ import { fileURLToPath } from "url";
 
 
 const WORDS_DATABASE = {
-  "Food": ["Pizza", "Sushi", "Burger", "Pasta", "Taco", "Pancake", "Waffle", "Ice Cream", "Salad", "Steak"],
-  "Animals": ["Elephant", "Giraffe", "Penguin", "Kangaroo", "Lion", "Dolphin", "Panda", "Koala", "Zebra", "Octopus"],
-  "Movies": ["Inception", "Titanic", "Avatar", "Gladiator", "Matrix", "Frozen", "Jaws", "Up", "Cars", "Coco"],
-  "Places": ["Paris", "Tokyo", "London", "New York", "Cairo", "Sydney", "Rome", "Rio", "Moscow", "Dubai"],
-  "Objects": ["Smartphone", "Umbrella", "Backpack", "Toaster", "Flashlight", "Compass", "Key", "Wallet", "Spectacles", "Bicycle"]
+  "Food": ["Pizza", "Sushi", "Burger", "Pasta", "Taco", "Pancake", "Waffle", "Ice Cream", "Salad", "Steak", "Sandwich", "Soup", "Cake", "Cookie", "Bread", "Cheese", "Chicken", "Fish", "Rice", "Noodles"],
+  "Animals": ["Elephant", "Giraffe", "Penguin", "Kangaroo", "Lion", "Dolphin", "Panda", "Koala", "Zebra", "Octopus", "Tiger", "Bear", "Wolf", "Fox", "Rabbit", "Deer", "Horse", "Cow", "Sheep", "Goat"],
+  "Movies": ["Inception", "Titanic", "Avatar", "Gladiator", "Matrix", "Frozen", "Jaws", "Up", "Cars", "Coco", "Batman", "Superman", "Wonder Woman", "Iron Man", "Captain America", "Thor", "Hulk", "Spider-Man", "Black Widow", "Doctor Strange"],
+  "Places": ["Paris", "Tokyo", "London", "New York", "Cairo", "Sydney", "Rome", "Rio", "Moscow", "Dubai", "Berlin", "Madrid", "Amsterdam", "Vienna", "Prague", "Budapest", "Athens", "Istanbul", "Bangkok", "Singapore"],
+  "Objects": ["Smartphone", "Umbrella", "Backpack", "Toaster", "Flashlight", "Compass", "Key", "Wallet", "Spectacles", "Bicycle", "Laptop", "Mouse", "Keyboard", "Monitor", "Chair", "Table", "Pen", "Pencil", "Book", "Lamp"],
+  "Sports": ["Soccer", "Basketball", "Baseball", "Football", "Tennis", "Golf", "Swimming", "Running", "Cycling", "Volleyball", "Hockey", "Cricket", "Rugby", "Boxing", "Wrestling", "Skiing", "Snowboarding", "Surfing", "Skateboarding", "Badminton"],
+  "Fruits": ["Apple", "Banana", "Orange", "Grape", "Strawberry", "Blueberry", "Pineapple", "Mango", "Kiwi", "Peach", "Pear", "Cherry", "Lemon", "Lime", "Watermelon", "Cantaloupe", "Honeydew", "Plum", "Apricot", "Fig"],
+  "Countries": ["USA", "Canada", "Mexico", "Brazil", "Argentina", "UK", "France", "Germany", "Italy", "Spain", "Russia", "China", "Japan", "India", "Australia", "South Africa", "Egypt", "Nigeria", "Kenya", "Morocco"],
+  "Professions": ["Doctor", "Teacher", "Engineer", "Nurse", "Lawyer", "Chef", "Pilot", "Firefighter", "Police Officer", "Scientist", "Artist", "Musician", "Actor", "Writer", "Programmer", "Designer", "Mechanic", "Farmer", "Dentist", "Pharmacist"],
+  "Superheroes": ["Superman", "Batman", "Wonder Woman", "Spider-Man", "Iron Man", "Captain America", "Thor", "Hulk", "Black Widow", "Hawkeye", "Flash", "Aquaman", "Green Lantern", "Martian Manhunter", "Cyborg", "Deadpool", "Wolverine", "Storm", "Jean Grey", "Professor X"]
 };
 
 type GameState = "LOBBY" | "ROLES" | "CLUES" | "VOTE_DECISION" | "VOTING" | "RESULT";
