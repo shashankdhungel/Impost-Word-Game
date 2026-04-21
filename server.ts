@@ -16,7 +16,7 @@ const WORDS_DATABASE = {
   "Objects": ["Smartphone", "Umbrella", "Backpack", "Toaster", "Flashlight", "Compass", "Key", "Wallet", "Spectacles", "Bicycle"]
 };
 
-type GameState = "LOBBY" | "ROLES" | "CLUES" | "VOTING" | "RESULT";
+type GameState = "LOBBY" | "ROLES" | "CLUES" | "VOTE_DECISION" | "VOTING" | "RESULT";
 
 interface Player {
   id: string;
@@ -150,7 +150,25 @@ async function startServer() {
       room.currentTurnIndex++;
 
       if (room.currentTurnIndex >= room.players.length) {
+        room.state = "VOTE_DECISION";
+      }
+
+      io.to(code).emit("room_updated", room);
+    });
+
+    socket.on("vote_decision", ({ code, decision }) => {
+      const room = rooms[code];
+      if (!room || room.state !== "VOTE_DECISION") return;
+      if (socket.id !== room.players.find(p => p.isHost)?.id) return;
+
+      if (decision === "VOTE") {
         room.state = "VOTING";
+      } else if (decision === "SKIP") {
+        room.state = "CLUES";
+        room.currentTurnIndex = 0;
+        room.players.forEach(p => {
+          p.clue = undefined;
+        });
       }
 
       io.to(code).emit("room_updated", room);
