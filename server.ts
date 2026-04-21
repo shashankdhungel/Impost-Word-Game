@@ -39,6 +39,7 @@ interface Room {
   winner?: "PLAYERS" | "IMPOSTER";
   imposterGuess?: string;
   caught?: boolean;
+  voteDecisions?: Record<string, 'VOTE' | 'SKIP'>;
 }
 
 const rooms: Record<string, Room> = {};
@@ -127,6 +128,7 @@ async function startServer() {
       room.winner = undefined;
       room.imposterGuess = undefined;
       room.caught = false;
+      room.voteDecisions = {};
 
       io.to(code).emit("room_updated", room);
 
@@ -159,19 +161,40 @@ async function startServer() {
     socket.on("vote_decision", ({ code, decision }) => {
       const room = rooms[code];
       if (!room || room.state !== "VOTE_DECISION") return;
-      if (socket.id !== room.players.find(p => p.isHost)?.id) return;
 
-      if (decision === "VOTE") {
-        room.state = "VOTING";
-      } else if (decision === "SKIP") {
-        room.state = "CLUES";
-        room.currentTurnIndex = 0;
-        room.players.forEach(p => {
-          p.clue = undefined;
-        });
-      }
+      // Any player can submit their decision
+      room.voteDecisions = room.voteDecisions || {};
+      room.voteDecisions[socket.id] = decision;
 
+      // Emit after every decision so players see live count
       io.to(code).emit("room_updated", room);
+
+      // Check if all players have submitted a decision
+      const allDecided = room.players.every(p => room.voteDecisions![p.id]);
+      if (allDecided) {
+        // Tally the votes
+        let voteCount = 0;
+        let skipCount = 0;
+        Object.values(room.voteDecisions).forEach(d => {
+          if (d === "VOTE") voteCount++;
+          else if (d === "SKIP") skipCount++;
+        });
+
+        // Majority decision
+        if (voteCount > skipCount) {
+          room.state = "VOTING";
+        } else {
+          // skipCount >= voteCount
+          room.state = "CLUES";
+          room.currentTurnIndex = 0;
+          room.players.forEach(p => {
+            p.clue = undefined;
+          });
+          room.voteDecisions = {};
+        }
+
+        io.to(code).emit("room_updated", room);
+      }
     });
 
     socket.on("submit_vote", ({ code, targetId }) => {

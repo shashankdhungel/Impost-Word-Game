@@ -24,18 +24,31 @@ export default function GameView({ room, player, socket }: Props) {
       case "CLUES":
         return <ClueScreen key="clues" room={room} player={player} socket={socket} />;
       case "VOTE_DECISION":
+        const hasDecided = room.voteDecisions && room.voteDecisions[player.id];
+        const decidedCount = room.voteDecisions ? Object.keys(room.voteDecisions).length : 0;
+        const totalPlayers = room.players.length;
+        
+        let voteCount = 0;
+        let skipCount = 0;
+        if (room.voteDecisions) {
+          Object.values(room.voteDecisions).forEach(d => {
+            if (d === "VOTE") voteCount++;
+            else if (d === "SKIP") skipCount++;
+          });
+        }
+        
         return (
           <div key="vote-decision" className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-4">
             <div className="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full text-center">
               <h1 className="text-3xl font-bold text-gray-800 mb-8">All clues have been given!</h1>
               
-              {player.isHost ? (
+              {!hasDecided ? (
                 <div className="space-y-4">
                   <button
                     onClick={() => socket.emit("vote_decision", { code: room.code, decision: "VOTE" })}
                     className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200"
                   >
-                    Proceed to Vote
+                    Vote This Round
                   </button>
                   <button
                     onClick={() => socket.emit("vote_decision", { code: room.code, decision: "SKIP" })}
@@ -45,8 +58,12 @@ export default function GameView({ room, player, socket }: Props) {
                   </button>
                 </div>
               ) : (
-                <p className="text-lg text-gray-600">Waiting for host to decide...</p>
+                <p className="text-lg text-gray-600 mb-4">Waiting for others to decide... ({decidedCount}/{totalPlayers} voted)</p>
               )}
+              
+              <div className="mt-6 text-sm font-semibold text-gray-700">
+                Live Tally: <span className="text-blue-600">Vote: {voteCount}</span> | <span className="text-orange-600">Skip: {skipCount}</span>
+              </div>
             </div>
           </div>
         );
