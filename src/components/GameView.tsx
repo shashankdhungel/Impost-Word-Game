@@ -38,32 +38,30 @@ export default function GameView({ room, player, socket }: Props) {
         }
         
         return (
-          <div key="vote-decision" className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-4">
-            <div className="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full text-center">
-              <h1 className="text-3xl font-bold text-gray-800 mb-8">All clues have been given!</h1>
-              
-              {!hasDecided ? (
-                <div className="space-y-4">
-                  <button
-                    onClick={() => socket.emit("vote_decision", { code: room.code, decision: "VOTE" })}
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200"
-                  >
-                    Vote This Round
-                  </button>
-                  <button
-                    onClick={() => socket.emit("vote_decision", { code: room.code, decision: "SKIP" })}
-                    className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200"
-                  >
-                    Skip & Give Clues Again
-                  </button>
-                </div>
-              ) : (
-                <p className="text-lg text-gray-600 mb-4">Waiting for others to decide... ({decidedCount}/{totalPlayers} voted)</p>
-              )}
-              
-              <div className="mt-6 text-sm font-semibold text-gray-700">
-                Live Tally: <span className="text-blue-600">Vote: {voteCount}</span> | <span className="text-orange-600">Skip: {skipCount}</span>
+          <div key="vote-decision" className="flex flex-col items-center justify-center min-h-screen bg-black p-4">
+            <h1 className="text-6xl font-black text-white uppercase italic mb-16 text-center tracking-tighter">All clues have been given!</h1>
+            
+            {!hasDecided ? (
+              <div className="space-y-6 w-full max-w-md">
+                <button
+                  onClick={() => socket.emit("vote_decision", { code: room.code, decision: "VOTE" })}
+                  className="w-full bg-[#f97316] hover:bg-orange-600 text-black font-black uppercase py-4 px-6 border-4 border-black transition duration-200"
+                >
+                  Vote This Round
+                </button>
+                <button
+                  onClick={() => socket.emit("vote_decision", { code: room.code, decision: "SKIP" })}
+                  className="w-full bg-black text-white font-black uppercase py-4 px-6 border-4 border-white transition duration-200"
+                >
+                  Skip & Give Clues Again
+                </button>
               </div>
+            ) : (
+              <p className="text-white font-black uppercase text-2xl mb-12">Waiting for others to decide... ({decidedCount}/{totalPlayers} voted)</p>
+            )}
+            
+            <div className="mt-16 text-center text-white font-black uppercase text-2xl tracking-wide">
+              Vote: {voteCount} | Skip: {skipCount}
             </div>
           </div>
         );
