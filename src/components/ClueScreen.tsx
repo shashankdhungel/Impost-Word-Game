@@ -27,7 +27,7 @@ export default function ClueScreen({ room, player, socket }: Props) {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="w-full space-y-6"
+      className="w-full space-y-6 pb-64"
     >
       <div className="bg-black text-white p-6 shadow-bold relative overflow-hidden">
         <div className="absolute top-0 right-0 p-4 opacity-20">
@@ -39,46 +39,70 @@ export default function ClueScreen({ room, player, socket }: Props) {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-4">
-        <AnimatePresence>
-          {room.players.map((p, idx) => (
-            <motion.div
-              layout
-              key={p.id}
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: idx * 0.1 }}
-              className={`p-4 border-4 border-black flex justify-between items-center transition-all ${
-                idx === room.currentTurnIndex 
-                  ? "bg-white scale-105 shadow-bold z-20" 
-                  : idx < room.currentTurnIndex 
-                  ? "bg-gray-100 opacity-60" 
-                  : "bg-[#eee] opacity-40"
-              }`}
-            >
-              <div className="flex items-center gap-3">
-                <div className={`w-8 h-8 rounded-full border-2 border-black flex items-center justify-center font-black text-xs ${idx === room.currentTurnIndex ? "bg-black text-white" : "bg-white"}`}>
-                  {idx + 1}
-                </div>
-                <span className="font-black uppercase text-sm">{p.nickname}</span>
-              </div>
-              
-              <div className="font-bold italic uppercase">
-                {p.clue ? (
-                  <motion.span initial={{ scale: 1.5 }} animate={{ scale: 1 }}>
-                    {p.clue}
-                  </motion.span>
-                ) : idx === room.currentTurnIndex ? (
-                  <span className="animate-pulse">Thinking...</span>
-                ) : (
-                  <span>...</span>
-                )}
-              </div>
-            </motion.div>
-          ))}
-        </AnimatePresence>
+      {/* SECTION 1 - CLUES SO FAR */}
+      <div className="space-y-4 max-h-48 overflow-y-auto">
+        <h2 className="text-2xl font-black uppercase text-white px-4">Clues So Far</h2>
+        {room.currentTurnIndex === 0 ? (
+          <div className="px-4 py-3 text-white opacity-60 font-bold italic uppercase">
+            No clues yet...
+          </div>
+        ) : (
+          <div className="space-y-3 px-4">
+            {room.players.slice(0, room.currentTurnIndex).map((p, idx) => (
+              <motion.div
+                layout
+                key={p.id}
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: idx * 0.1 }}
+                className="p-4 border-4 border-black bg-white flex justify-between items-center gap-4"
+              >
+                <span className="font-black uppercase text-sm flex-shrink-0">{p.nickname}:</span>
+                <span className="font-bold italic uppercase text-right flex-1">{p.clue}</span>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </div>
 
+      {/* SECTION 2 - UP NEXT */}
+      <div className="space-y-4 px-4">
+        <h2 className="text-2xl font-black uppercase text-white">Up Next</h2>
+        
+        {/* Current player thinking */}
+        <motion.div
+          initial={{ scale: 0.95, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="p-4 border-4 border-black bg-[#f97316] flex justify-between items-center gap-4 scale-105"
+        >
+          <span className="font-black uppercase text-sm">⏳</span>
+          <span className="font-black uppercase flex-1">{currentPlayer.nickname} is thinking...</span>
+          <motion.span
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+            className="text-lg"
+          >
+            ⏱️
+          </motion.span>
+        </motion.div>
+
+        {/* Remaining players */}
+        {room.currentTurnIndex < room.players.length - 1 && (
+          <div className="space-y-2">
+            {room.players.slice(room.currentTurnIndex + 1).map((p) => (
+              <div
+                key={p.id}
+                className="p-3 border-2 border-gray-400 bg-gray-200 opacity-60 flex items-center gap-3"
+              >
+                <span className="font-black uppercase text-sm">{p.nickname}</span>
+                <span className="font-bold">...</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* INPUT BOX - KEEP EXACTLY AS IS */}
       <AnimatePresence>
         {isMyTurn && (
           <motion.div

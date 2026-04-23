@@ -41,6 +41,17 @@ export default function GameView({ room, player, socket }: Props) {
           <div key="vote-decision" className="flex flex-col items-center justify-center min-h-screen bg-black p-4">
             <h1 className="text-6xl font-black text-white uppercase italic mb-16 text-center tracking-tighter">All clues have been given!</h1>
             
+            <div className="w-full max-w-2xl mb-12">
+              <h2 className="text-3xl font-black text-white uppercase mb-6 text-center">Clues Given:</h2>
+              <div className="space-y-3">
+                {room.players.map((p) => (
+                  <div key={p.id} className="text-white font-black uppercase text-lg">
+                    <span className="text-[#f97316]">{p.nickname}:</span> {p.clue || "—"}
+                  </div>
+                ))}
+              </div>
+            </div>
+            
             {!hasDecided ? (
               <div className="space-y-6 w-full max-w-md">
                 <button
