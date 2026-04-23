@@ -40,7 +40,7 @@ export default function ClueScreen({ room, player, socket }: Props) {
       </div>
 
       {/* SECTION 1 - CLUES SO FAR */}
-      <div className="space-y-4 max-h-48 overflow-y-auto">
+      <div className="space-y-4">
         <h2 className="text-2xl font-black uppercase text-white px-4">Clues So Far</h2>
         {room.currentTurnIndex === 0 ? (
           <div className="px-4 py-3 text-white opacity-60 font-bold italic uppercase">
@@ -75,8 +75,8 @@ export default function ClueScreen({ room, player, socket }: Props) {
           animate={{ scale: 1, opacity: 1 }}
           className="p-4 border-4 border-black bg-[#f97316] flex justify-between items-center gap-4 scale-105"
         >
-          <span className="font-black uppercase text-sm">⏳</span>
-          <span className="font-black uppercase flex-1">{currentPlayer.nickname} is thinking...</span>
+          <span className="font-black uppercase text-sm flex-shrink-0">{currentPlayer.nickname}:</span>
+          <span className="font-bold italic uppercase text-right flex-1">Thinking</span>
           <motion.span
             animate={{ rotate: 360 }}
             transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
@@ -95,7 +95,6 @@ export default function ClueScreen({ room, player, socket }: Props) {
                 className="p-3 border-2 border-gray-400 bg-gray-200 opacity-60 flex items-center gap-3"
               >
                 <span className="font-black uppercase text-sm">{p.nickname}</span>
-                <span className="font-bold">...</span>
               </div>
             ))}
           </div>
