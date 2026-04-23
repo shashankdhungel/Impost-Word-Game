@@ -73,10 +73,16 @@ export default function ClueScreen({ room, player, socket }: Props) {
         <motion.div
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className="p-4 border-4 border-black bg-[#f97316] flex justify-between items-center gap-4 scale-105"
+          className="p-4 border-4 border-black bg-[#f97316] flex justify-between items-center gap-4 scale-105 border-l-8 border-l-orange-800"
         >
-          <span className="font-black uppercase text-sm flex-shrink-0">{currentPlayer.nickname}:</span>
-          <span className="font-bold italic uppercase text-right flex-1">Thinking</span>
+          <span className="font-black uppercase text-lg italic flex-shrink-0">{currentPlayer.nickname}:</span>
+          <motion.span
+            animate={{ opacity: [0.3, 1, 0.3] }}
+            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+            className="font-bold italic uppercase text-right flex-1"
+          >
+            Thinking
+          </motion.span>
           <motion.span
             animate={{ rotate: 360 }}
             transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
@@ -89,12 +95,15 @@ export default function ClueScreen({ room, player, socket }: Props) {
         {/* Remaining players */}
         {room.currentTurnIndex < room.players.length - 1 && (
           <div className="space-y-2">
-            {room.players.slice(room.currentTurnIndex + 1).map((p) => (
+            {room.players.slice(room.currentTurnIndex + 1).map((p, idx) => (
               <div
                 key={p.id}
                 className="p-3 border-2 border-gray-400 bg-gray-200 opacity-60 flex items-center gap-3"
               >
-                <span className="font-black uppercase text-sm">{p.nickname}</span>
+                <div className="w-8 h-8 rounded-full border-2 border-gray-500 flex items-center justify-center font-black text-xs bg-white">
+                  {room.currentTurnIndex + 2 + idx}
+                </div>
+                <span className="font-black uppercase italic text-sm">{p.nickname}</span>
               </div>
             ))}
           </div>
