@@ -15,15 +15,18 @@ const WORDS_DATABASE = {
   "Places": ["Paris", "Tokyo", "London", "New York", "Cairo", "Sydney", "Rome", "Rio", "Moscow", "Dubai", "Berlin", "Madrid", "Amsterdam", "Vienna", "Prague", "Budapest", "Athens", "Istanbul", "Bangkok", "Singapore"],
   "Objects": ["Smartphone", "Umbrella", "Backpack", "Toaster", "Flashlight", "Compass", "Key", "Wallet", "Spectacles", "Bicycle", "Laptop", "Mouse", "Keyboard", "Monitor", "Chair", "Table", "Pen", "Pencil", "Book", "Lamp"],
   "Sports": ["Soccer", "Basketball", "Baseball", "Football", "Tennis", "Golf", "Swimming", "Running", "Cycling", "Volleyball", "Hockey", "Cricket", "Rugby", "Boxing", "Wrestling", "Skiing", "Snowboarding", "Surfing", "Skateboarding", "Badminton"],
-  "Fruits": ["Apple", "Banana", "Orange", "Grape", "Strawberry", "Blueberry", "Pineapple", "Mango", "Kiwi", "Peach", "Pear", "Cherry", "Lemon", "Lime", "Watermelon", "Cantaloupe", "Honeydew", "Plum", "Apricot", "Fig"],
-  "Countries": ["USA", "Canada", "Mexico", "Brazil", "Argentina", "UK", "France", "Germany", "Italy", "Spain", "Russia", "China", "Japan", "India", "Australia", "South Africa", "Egypt", "Nigeria", "Kenya", "Morocco"],
+  "Fruits": ["Apple", "Banana", "Orange", "Grape", "Strawberry", "Blueberry", "Pineapple", "Mango", "Kiwi", "Peach", "Pear", "Cherry", "Lemon", "Lime", "Watermelon", "Cantaloupe", "Honeydew", "Plum", "Apricot", "Pomegranate"],
+  "Countries": ["USA", "Nepal", "Canada", "Mexico", "Brazil", "Argentina", "UK", "France", "Germany", "Italy", "Spain", "Russia", "China", "Japan", "India", "Australia", "South Africa", "Egypt", "Nigeria", "Kenya", "Morocco"],
   "Professions": ["Doctor", "Teacher", "Engineer", "Nurse", "Lawyer", "Chef", "Pilot", "Firefighter", "Police Officer", "Scientist", "Artist", "Musician", "Actor", "Writer", "Programmer", "Designer", "Mechanic", "Farmer", "Dentist", "Pharmacist"],
-  "Superheroes": ["Superman", "Batman", "Wonder Woman", "Spider-Man", "Iron Man", "Captain America", "Thor", "Hulk", "Black Widow", "Hawkeye", "Flash", "Aquaman", "Green Lantern", "Martian Manhunter", "Cyborg", "Deadpool", "Wolverine", "Storm", "Jean Grey", "Professor X"],
+  "Superheroes": ["Superman", "Batman", "Wonder Woman", "Spider-Man", "Iron Man", "Captain America", "Thor", "Hulk","Hawkeye", "Aquaman", "Green Lantern", "Storm"],
   "Nepali Food": ["Momo", "Dal Bhat", "Gundruk", "Aloo Gobi", "Samosa", "Chowmein", "Sekuwa", "Sel Roti", "Dhedo", "Juju Dhau", "Bara", "Kheer", "Puri", "Thali", "Chatamari", "Yomari", "Lapsi"],
   "Nepali Places": ["Kathmandu", "Pokhara", "Everest", "Bhaktapur", "Lalitpur", "Pashupatinath", "Swayambhunath", "Boudhanath", "Chitwan", "Janakpur", "Annapurna", "Thamel", "Nuwakot", "Gorkha", "Nagarkot", "Bandipur", "Ilam", "Jhapa"],
   "Nepali Festivals": ["Dashain", "Tihar", "Losar", "Holi", "Bisket Jatra", "Teej", "Shivaratri", "Indra Jatra", "Rato Machhindranath", "Raaksha Bandhan", "Nepali New Year", "Naga Panchami", "Makar Sankranti", "Ghatasthapana", "Bijaya Dashami", "Govardhan Puja", "Bhai Tika"],
-  "Bollywood Movies": ["Dilwale", "Sholay", "Amar Akbar Anthony", "Kabhie Khusi Kabhi Gham", "Lagaan", "Rang De Basanti", "3 Idiots", "Padmaavat", "Devdas", "Kal Ho Naa Ho", "Chak De India", "Bajrangi Bhaijaan", "Queen", "PK", "Barfi", "Raees", "Dil To Pagal Hai"],
-  "Cricket Players": ["Virat Kohli", "Rohit Sharma", "MS Dhoni", "Sachin Tendulkar", "Kumar Sangakkara", "Brian Lara", "Wasim Akram", "Shane Warne", "Steve Smith", "Joe Root", "Babar Azam", "Kane Williamson", "Rashid Khan", "Sandeep Lamichhane", "Paras Khadka", "Sompal Kami", "Mustafizur Rahman"]
+  "Bollywood Movies": ["Dilwale", "Sholay", "Amar Akbar Anthony", "Kabhie Khusi Kabhi Gham", "Rang De Basanti", "3 Idiots", "Devdas", "Kal Ho Naa Ho", "Chak De India", "Bajrangi Bhaijaan", "Queen", "PK", "Barfi"],
+  "Cricket Players": ["Virat Kohli", "MS Dhoni", "Sachin Tendulkar","Sandeep Lamichhane", "Paras Khadka", "Sompal Kami"],
+  "Nepali Politicians": ["KP Sharma Oli", "Prachanda", "Sher Bahadur Deuba", "Balen", "Sudan Gurung", "Rabi Lamichhane"],
+  "Nepali Street Food": ["Pani Puri", "Chatpate", "Samosa", "Chowmein", "Momo", "Sekuwa", "Choila", "Sel Roti", "Titaura", "Dosa"],
+  "Nepali Culture": ["Deusi Bhailo", "Dhaka Topi", "Gunyu Cholo", "Khukuri", "Mandala"]
 };
 
 type GameState = "LOBBY" | "ROLES" | "CLUES" | "VOTE_DECISION" | "VOTING" | "RESULT";
