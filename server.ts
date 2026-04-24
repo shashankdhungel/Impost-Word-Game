@@ -18,7 +18,12 @@ const WORDS_DATABASE = {
   "Fruits": ["Apple", "Banana", "Orange", "Grape", "Strawberry", "Blueberry", "Pineapple", "Mango", "Kiwi", "Peach", "Pear", "Cherry", "Lemon", "Lime", "Watermelon", "Cantaloupe", "Honeydew", "Plum", "Apricot", "Fig"],
   "Countries": ["USA", "Canada", "Mexico", "Brazil", "Argentina", "UK", "France", "Germany", "Italy", "Spain", "Russia", "China", "Japan", "India", "Australia", "South Africa", "Egypt", "Nigeria", "Kenya", "Morocco"],
   "Professions": ["Doctor", "Teacher", "Engineer", "Nurse", "Lawyer", "Chef", "Pilot", "Firefighter", "Police Officer", "Scientist", "Artist", "Musician", "Actor", "Writer", "Programmer", "Designer", "Mechanic", "Farmer", "Dentist", "Pharmacist"],
-  "Superheroes": ["Superman", "Batman", "Wonder Woman", "Spider-Man", "Iron Man", "Captain America", "Thor", "Hulk", "Black Widow", "Hawkeye", "Flash", "Aquaman", "Green Lantern", "Martian Manhunter", "Cyborg", "Deadpool", "Wolverine", "Storm", "Jean Grey", "Professor X"]
+  "Superheroes": ["Superman", "Batman", "Wonder Woman", "Spider-Man", "Iron Man", "Captain America", "Thor", "Hulk", "Black Widow", "Hawkeye", "Flash", "Aquaman", "Green Lantern", "Martian Manhunter", "Cyborg", "Deadpool", "Wolverine", "Storm", "Jean Grey", "Professor X"],
+  "Nepali Food": ["Momo", "Dal Bhat", "Gundruk", "Aloo Gobi", "Samosa", "Chowmein", "Sekuwa", "Sel Roti", "Dhedo", "Juju Dhau", "Bara", "Kheer", "Puri", "Thali", "Chatamari", "Yomari", "Lapsi"],
+  "Nepali Places": ["Kathmandu", "Pokhara", "Everest", "Bhaktapur", "Lalitpur", "Pashupatinath", "Swayambhunath", "Boudhanath", "Chitwan", "Janakpur", "Annapurna", "Thamel", "Nuwakot", "Gorkha", "Nagarkot", "Bandipur", "Ilam", "Jhapa"],
+  "Nepali Festivals": ["Dashain", "Tihar", "Losar", "Holi", "Bisket Jatra", "Teej", "Shivaratri", "Indra Jatra", "Rato Machhindranath", "Raaksha Bandhan", "Nepali New Year", "Naga Panchami", "Makar Sankranti", "Ghatasthapana", "Bijaya Dashami", "Govardhan Puja", "Bhai Tika"],
+  "Bollywood Movies": ["Dilwale", "Sholay", "Amar Akbar Anthony", "Kabhie Khusi Kabhi Gham", "Lagaan", "Rang De Basanti", "3 Idiots", "Padmaavat", "Devdas", "Kal Ho Naa Ho", "Chak De India", "Bajrangi Bhaijaan", "Queen", "PK", "Barfi", "Raees", "Dil To Pagal Hai"],
+  "Cricket Players": ["Virat Kohli", "Rohit Sharma", "MS Dhoni", "Sachin Tendulkar", "Kumar Sangakkara", "Brian Lara", "Wasim Akram", "Shane Warne", "Steve Smith", "Joe Root", "Babar Azam", "Kane Williamson", "Rashid Khan", "Sandeep Lamichhane", "Paras Khadka", "Sompal Kami", "Mustafizur Rahman"]
 };
 
 type GameState = "LOBBY" | "ROLES" | "CLUES" | "VOTE_DECISION" | "VOTING" | "RESULT";
