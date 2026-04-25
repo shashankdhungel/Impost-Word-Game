@@ -100,6 +100,10 @@ async function startServer() {
         return socket.emit("error", { message: "Nickname already taken" });
       }
 
+      if (room.players.length >= 7) {
+        return socket.emit("error", { message: "Room is full! Maximum 7 players allowed" });
+      }
+
       const player: Player = { id: socket.id, nickname, isHost: false, score: 0 };
       room.players.push(player);
       socket.join(roomCode);
