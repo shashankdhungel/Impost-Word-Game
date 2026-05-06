@@ -57,7 +57,7 @@ export default function App() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20vw] font-black opacity-20 transform -rotate-12">IMPOSTER</div>
       </div>
 
-      <header className="fixed top-0 left-0 right-0 p-6 flex justify-between items-center z-50">
+      <header className="fixed top-0 left-0 right-0 p-6 flex justify-between items-center z-50 bg-[#FF6321] border-b-4 border-black">
         <div className="flex items-center gap-2">
           <div className="w-10 h-10 bg-black text-[#FF6321] flex items-center justify-center font-black text-xl transform -rotate-12 shadow-bold">
             I
