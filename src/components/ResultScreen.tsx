@@ -101,7 +101,6 @@ export default function ResultScreen({ room, player, socket }: Props) {
                <div className="flex items-center gap-3">
                  <span className="text-xs font-black w-6 text-center">{idx + 1}.</span>
                  <span className="font-black uppercase">{p.nickname}</span>
-                 {p.id === room.imposterId && <span className="text-[8px] bg-black text-white px-1 font-bold">ALIBI</span>}
                </div>
                <span className="font-black text-xl">{p.score}</span>
              </div>
