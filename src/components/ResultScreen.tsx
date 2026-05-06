@@ -20,26 +20,6 @@ export default function ResultScreen({ room, player, socket }: Props) {
 
   const imposter = room.players.find(p => p.id === room.imposterId);
 
-  const PUNISHMENTS = [
-    "Hold a plank for 5 seconds! ⏱️",
-    "Spin around 3 times! 🌀",
-    "Do your best robot dance for 5 seconds! 🤖",
-    "Hop on one leg for 5 seconds! 🦵",
-    "Do 5 push ups! 💪",
-    "Bark like a dog for 3 seconds! 🐶",
-    "Sing the first line of Nepal's national anthem! 🇳🇵",
-    "Say 'I am the imposter' in 3 different accents! 🎭",
-    "Make a chicken sound for 3 seconds! 🐔",
-    "Speak only in whispers for the next round! 🤫",
-    "Laugh like a villain for 3 seconds! 😈",
-    "Do your best Bollywood dance move! 🎬",
-    "Imitate another player in the room! 👥",
-    "Say something nice about every player! 💝",
-    "Tell your most embarrassing moment in 10 seconds! 😳"
-  ];
-
-  const punishment = PUNISHMENTS[Math.floor(Math.random() * PUNISHMENTS.length)];
-
   const losers = room.players.filter(p => 
     !(p.role === "IMPOSTER" && room.winner === "IMPOSTER") && 
     !(p.role === "PLAYER" && room.winner === "PLAYERS")
@@ -97,6 +77,22 @@ export default function ResultScreen({ room, player, socket }: Props) {
         </div>
       </div>
 
+      {losers.length > 0 && room.punishment && (
+        <div className="bg-black border-8 border-[#FF6321] p-6 sm:p-8 text-center space-y-4">
+          <h3 className="text-3xl font-black italic uppercase text-red-500">PUNISHMENT FOR LOSERS! 😈</h3>
+          <p className="text-white font-black uppercase text-lg">
+            {losers.map(l => l.nickname).join(", ")}
+          </p>
+          <motion.p
+            animate={{ opacity: [1, 0.5, 1] }}
+            transition={{ duration: 1, repeat: Infinity }}
+            className="text-white font-black italic uppercase text-2xl sm:text-4xl"
+          >
+            {room.punishment}
+          </motion.p>
+        </div>
+      )}
+
       <div className="space-y-4">
         <h3 className="text-center font-black uppercase text-xl">Current Leaderboard</h3>
         <div className="space-y-2">
@@ -112,22 +108,6 @@ export default function ResultScreen({ room, player, socket }: Props) {
           ))}
         </div>
       </div>
-
-      {losers.length > 0 && (
-        <div className="bg-black border-8 border-[#FF6321] p-6 sm:p-8 text-center space-y-4">
-          <h3 className="text-3xl font-black italic uppercase text-red-500">PUNISHMENT FOR LOSERS! 😈</h3>
-          <p className="text-white font-black uppercase text-lg">
-            {losers.map(l => l.nickname).join(", ")}
-          </p>
-          <motion.p
-            animate={{ opacity: [1, 0.5, 1] }}
-            transition={{ duration: 1, repeat: Infinity }}
-            className="text-white font-black italic uppercase text-2xl sm:text-4xl"
-          >
-            {punishment}
-          </motion.p>
-        </div>
-      )}
 
       {player.isHost ? (
         <button

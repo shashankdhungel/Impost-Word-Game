@@ -7,6 +7,23 @@ import path from "path";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 
+const PUNISHMENTS = [
+  "Hold a plank for 5 seconds! ⏱️",
+  "Spin around 3 times! 🌀",
+  "Do your best robot dance for 5 seconds! 🤖",
+  "Hop on one leg for 5 seconds! 🦵",
+  "Do 5 push ups! 💪",
+  "Bark like a dog for 3 seconds! 🐶",
+  "Sing the first line of Nepal's national anthem! 🇳🇵",
+  "Say 'I am the imposter' in 3 different accents! 🎭",
+  "Make a chicken sound for 3 seconds! 🐔",
+  "Speak only in whispers for the next round! 🤫",
+  "Laugh like a villain for 3 seconds! 😈",
+  "Do your best Bollywood dance move! 🎬",
+  "Imitate another player in the room! 👥",
+  "Say something nice about every player! 💝",
+  "Tell your most embarrassing moment in 10 seconds! 😳"
+];
 
 const WORDS_DATABASE = {
   "Food": ["Pizza", "Sushi", "Burger", "Pasta", "Ice Cream", "Salad", "Sandwich", "Soup", "Cake", "Cookie", "Bread", "Cheese", "Chicken", "Fish", "Rice", "Noodles"],
@@ -65,6 +82,7 @@ interface Room {
   imposterGuess?: string;
   caught?: boolean;
   voteDecisions?: Record<string, 'VOTE' | 'SKIP'>;
+  punishment?: string;
 }
 
 const rooms: Record<string, Room> = {};
@@ -158,6 +176,7 @@ async function startServer() {
       room.imposterGuess = undefined;
       room.caught = false;
       room.voteDecisions = {};
+      room.punishment = undefined;
 
       io.to(code).emit("room_updated", room);
 
@@ -268,6 +287,7 @@ async function startServer() {
         } else {
           room.caught = false;
           room.winner = "IMPOSTER";
+          room.punishment = PUNISHMENTS[Math.floor(Math.random() * PUNISHMENTS.length)];
           updateScores(room, "IMPOSTER");
           room.state = "RESULT";
         }
@@ -286,6 +306,7 @@ async function startServer() {
       const isCorrect = guess.toLowerCase().trim() === room.word?.toLowerCase().trim();
       
       room.winner = isCorrect ? "IMPOSTER" : "PLAYERS";
+      room.punishment = PUNISHMENTS[Math.floor(Math.random() * PUNISHMENTS.length)];
       updateScores(room, room.winner);
       room.state = "RESULT";
       
